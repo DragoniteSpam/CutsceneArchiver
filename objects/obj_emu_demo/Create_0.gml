@@ -85,5 +85,12 @@ self.container = new EmuCore(0, 0, 640, 640, "main").AddContent([
         })
         .SetID("FULLNAME"),
     new EmuButton(32, EMU_AUTO, ew, eh, "Credits", function() {
+        var ew = 320;
+        var eh = 32;
+        new EmuDialog(360, 240, "Cutscene Archiver").AddContent([
+            new EmuText(32, EMU_AUTO, ew, eh, "Made by drago"),
+            new EmuText(32, EMU_AUTO, ew, eh, "Emu by drago"),
+            new EmuText(32, EMU_AUTO, ew, eh, "Scribble by juju")
+        ]).AddDefaultCloseButton("thanks!");
     })
 ]);
