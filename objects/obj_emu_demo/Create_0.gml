@@ -18,7 +18,7 @@ if (file_exists(SAVE_FILE_LOCATION)) {
 self.Add = function(filename) {
     if (!file_exists(filename)) return;
     
-    var list = self.contents.GetChild("LIST");
+    var list = self.container.GetChild("LIST");
     list.ClearSelection();
     
     // dont add duplicate filenames
