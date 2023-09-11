@@ -108,6 +108,7 @@ self.container = new EmuCore(0, 0, 640, 640, "main").AddContent([
         struct_remove(obj_emu_demo.filename_cache, file.filename);
         self.root.Refresh();
     })
+        .SetInteractive(false)
         .SetRefresh(function() {
             self.SetInteractive(!!self.GetSibling("LIST").GetSelectedItem());
         })
@@ -116,6 +117,7 @@ self.container = new EmuCore(0, 0, 640, 640, "main").AddContent([
         var item = self.GetSibling("LIST").GetSelectedItem();
         item.name = self.value;
     })
+        .SetInteractive(false)
         .SetRefresh(function() {
             var item = self.GetSibling("LIST").GetSelectedItem();
             self.SetInteractive(!!item);
@@ -132,7 +134,6 @@ self.container = new EmuCore(0, 0, 640, 640, "main").AddContent([
             static text_ending_chars = 18;
             
             var item = self.GetSibling("LIST").GetSelectedItem();
-            self.SetInteractive(!!item);
             if (item) {
                 var text = item.filename;
                 if (string_length(text) > text_length_limit) {
