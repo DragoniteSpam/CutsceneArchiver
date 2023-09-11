@@ -9,6 +9,11 @@ self.container = new EmuCore(0, 0, 640, 640, "main").AddContent([
     new EmuList(32, EMU_AUTO, ew, eh, "Files:", eh, 12, function() {
         self.root.Refresh();
     })
+        .SetCallbackMiddle(function() {
+            array_sort(obj_emu_demo.files, function(a, b) {
+                return (a.name > b.name) ? 1 : (a.name == b.name ? 0 : -1);
+            });
+        })
         .SetID("LIST")
         .SetList(self.files),
     new EmuButton(32, EMU_AUTO, ew, eh, "Add", function() {
