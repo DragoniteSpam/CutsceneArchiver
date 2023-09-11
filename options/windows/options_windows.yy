@@ -8,7 +8,7 @@
   "option_windows_copy_exe_to_dest": false,
   "option_windows_copyright_info": "2023 drago",
   "option_windows_description_info": "Pack a bunch of .yarn files together into one file",
-  "option_windows_disable_sandbox": false,
+  "option_windows_disable_sandbox": true,
   "option_windows_display_cursor": true,
   "option_windows_display_name": "Cutscene Archiver",
   "option_windows_enable_steam": false,
