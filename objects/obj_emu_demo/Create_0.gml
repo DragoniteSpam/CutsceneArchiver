@@ -1,5 +1,19 @@
+#macro SAVE_FILE_LOCATION "files.json"
+
 self.files = [];
 self.filename_cache = { };
+
+if (file_exists(SAVE_FILE_LOCATION)) {
+    var buffer = buffer_load(SAVE_FILE_LOCATION);
+    self.files = json_parse(buffer_read(buffer, buffer_text));
+    buffer_delete(buffer);
+    
+    for (var i = 0, n = array_length(self.files); i < n; i++) {
+        var file = self.files[i];
+        file.toString = method(file, function() { return self.name; });
+        self.filename_cache[$ file.filename] = file;
+    }
+}
 
 self.Export = function() {
     var save_filename = get_save_filename("", "output");
