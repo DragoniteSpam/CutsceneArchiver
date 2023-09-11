@@ -1,4 +1,4 @@
-#macro SAVE_FILE_LOCATION "files.json"
+#macro SAVE_FILE_LOCATION "files.cutscenesavejson"
 
 self.files = [];
 self.filename_cache = { };
