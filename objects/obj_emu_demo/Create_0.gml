@@ -15,6 +15,27 @@ if (file_exists(SAVE_FILE_LOCATION)) {
     }
 }
 
+self.Add = function(filename) {
+    if (!file_exists(filename)) return;
+    
+    var list = self.contents.GetChild("LIST");
+    list.ClearSelection();
+    
+    // dont add duplicate filenames
+    if (obj_emu_demo.filename_cache[$ filename]) {
+        var index = array_find_index(obj_emu_demo.files, method({ filename }, function(item) {
+            return item.filename == self.filename;
+        }));
+        list.Select(index);
+        return;
+    }
+    
+    var file = new File(filename);
+    array_push(obj_emu_demo.files, file);
+    obj_emu_demo.filename_cache[$ filename] = file;
+    list.Select(array_length(obj_emu_demo.files) - 1);
+};
+
 self.Export = function() {
     var save_filename = get_save_filename("", "output");
     if (save_filename == "") return;
@@ -70,6 +91,13 @@ self.Clear = function() {
     array_resize(self.files, 0);
 };
 
+self.Remove = function(index) {
+    var file = obj_emu_demo.files[index];
+    array_delete(obj_emu_demo.files, index, 1);
+    struct_remove(obj_emu_demo.filename_cache, file.filename);
+    self.root.Refresh();
+};
+
 var ew = 400;
 var eh = 32;
 
@@ -86,31 +114,10 @@ self.container = new EmuCore(0, 0, 640, 640, "main").AddContent([
         .SetID("LIST")
         .SetList(self.files),
     new EmuButton(32, EMU_AUTO, ew, eh, "Add", function() {
-        var filename = get_open_filename("Yarn files|*.yarn", "");
-        if (!file_exists(filename)) return;
-        
-        self.GetSibling("LIST").ClearSelection();
-        
-        // dont add duplicate filenames
-        if (obj_emu_demo.filename_cache[$ filename]) {
-            var index = array_find_index(obj_emu_demo.files, method({ filename }, function(item) {
-                return item.filename == self.filename;
-            }));
-            self.GetSibling("LIST").Select(index);
-            return;
-        }
-        
-        var file = new File(filename);
-        array_push(obj_emu_demo.files, file);
-        obj_emu_demo.filename_cache[$ filename] = file;
-        self.GetSibling("LIST").Select(array_length(obj_emu_demo.files) - 1);
+        obj_emu_demo.Add(get_open_filename("Yarn files|*.yarn", ""));
     }),
     new EmuButton(32, EMU_AUTO, ew, eh, "Remove", function() {
-        var selection = self.GetSibling("LIST").GetSelection();
-        var file = obj_emu_demo.files[selection];
-        array_delete(obj_emu_demo.files, selection, 1);
-        struct_remove(obj_emu_demo.filename_cache, file.filename);
-        self.root.Refresh();
+        obj_emu_demo.Remove(self.GetSibling("LIST").GetSelection());
     })
         .SetInteractive(false)
         .SetRefresh(function() {
