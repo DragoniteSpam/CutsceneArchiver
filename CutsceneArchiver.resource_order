@@ -91,6 +91,7 @@
     {"name":"__scribble_gen_8_position_glyphs","order":7,"path":"scripts/__scribble_gen_8_position_glyphs/__scribble_gen_8_position_glyphs.yy",},
     {"name":"__scribble_config_defaults","order":2,"path":"scripts/__scribble_config_defaults/__scribble_config_defaults.yy",},
     {"name":"scribble_font_add_msdf","order":3,"path":"scripts/scribble_font_add_msdf/scribble_font_add_msdf.yy",},
+    {"name":"Room1","order":31,"path":"rooms/Room1/Room1.yy",},
     {"name":"__scribble_gen_4_build_words","order":3,"path":"scripts/__scribble_gen_4_build_words/__scribble_gen_4_build_words.yy",},
     {"name":"scribble_external_sound_add","order":2,"path":"scripts/scribble_external_sound_add/scribble_external_sound_add.yy",},
     {"name":"scribble_super_glyph_delete","order":4,"path":"scripts/scribble_super_glyph_delete/scribble_super_glyph_delete.yy",},
