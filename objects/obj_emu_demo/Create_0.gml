@@ -66,12 +66,16 @@ self.Export = function() {
     buffer_delete(buffer);
 };
 
+self.Clear = function() {
+    array_resize(self.files, 0);
+};
+
 var ew = 400;
 var eh = 32;
 
 self.container = new EmuCore(0, 0, 640, 640, "main").AddContent([
     new EmuText(32, 32, ew, eh, "[c_aqua]Cutscene Archiver"),
-    new EmuList(32, EMU_AUTO, ew, eh, "Files:", eh, 12, function() {
+    new EmuList(32, EMU_AUTO, ew, eh, "Files:", eh, 10, function() {
         self.root.Refresh();
     })
         .SetCallbackMiddle(function() {
@@ -152,6 +156,9 @@ self.container = new EmuCore(0, 0, 640, 640, "main").AddContent([
         .SetID("FULLNAME"),
     new EmuButton(32, EMU_AUTO, ew, eh, "Export", function() {
         obj_emu_demo.Export();
+    }),
+    new EmuButton(32, EMU_AUTO, ew, eh, "Clear", function() {
+        obj_emu_demo.Clear();
     }),
     new EmuButton(32, EMU_AUTO, ew, eh, "Credits", function() {
         var ew = 320;
