@@ -11,6 +11,7 @@
     {"name":"scribble_anim_shake","order":6,"path":"scripts/scribble_anim_shake/scribble_anim_shake.yy",},
     {"name":"Changes","order":29,"path":"notes/Changes/Changes.yy",},
     {"name":"emu_init","order":4,"path":"scripts/emu_init/emu_init.yy",},
+    {"name":"File","order":32,"path":"scripts/File/File.yy",},
     {"name":"EmuDialog","order":16,"path":"scripts/EmuDialog/EmuDialog.yy",},
     {"name":"spr_emu_nineslice_tab","order":1,"path":"sprites/spr_emu_nineslice_tab/spr_emu_nineslice_tab.yy",},
     {"name":"spr_emu_enter","order":9,"path":"sprites/spr_emu_enter/spr_emu_enter.yy",},
