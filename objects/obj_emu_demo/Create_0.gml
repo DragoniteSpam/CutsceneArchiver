@@ -1,6 +1,57 @@
 self.files = [];
 self.filename_cache = { };
 
+self.Export = function() {
+    var save_filename = get_save_filename("", "output");
+    if (save_filename == "") return;
+    
+    var buffer_content = buffer_create(1, buffer_fixed, 1);
+    var buffer = buffer_create(1000, buffer_grow, 1);
+    var total = 0;
+    var skipped = 0;
+    
+    buffer_write(buffer, buffer_u64, 0);        // versioning?
+    buffer_write(buffer, buffer_u64, 0);        // count
+    buffer_write(buffer, buffer_u64, 0);        // appendage starts here
+    
+    for (var i = 0, n = array_length(obj_emu_demo.files); i < n; i++) {
+        var file = obj_emu_demo.files[i];
+        
+        if (!file_exists(file.filename)) {
+            skipped++;
+            return;
+        }
+        
+        var file_position = buffer_get_size(buffer_content);
+        var file_buffer = buffer_load(file.filename);
+        var file_size = buffer_get_size(file_buffer);
+        
+        buffer_write(buffer, buffer_string, file.name);
+        buffer_write(buffer, buffer_u64, file_position);
+        buffer_write(buffer, buffer_u64, file_size);
+        
+        total++;
+        
+        buffer_resize(buffer_content, file_position + buffer_get_size(file_buffer));
+        buffer_copy(file_buffer, 0, file_size, buffer_content, file_position);
+        buffer_delete(file_buffer);
+    };
+    
+    var appendage = buffer_tell(buffer);
+    
+    buffer_poke(buffer, 8, buffer_u64, total);
+    buffer_poke(buffer, 16, buffer_u64, appendage);
+    
+    var content_size = buffer_get_size(buffer_content);
+    buffer_resize(buffer, appendage + content_size);
+    buffer_copy(buffer_content, 0, content_size, buffer, appendage);
+    
+    buffer_save(buffer, save_filename);
+    
+    buffer_delete(buffer_content);
+    buffer_delete(buffer);
+};
+
 var ew = 400;
 var eh = 32;
 
@@ -84,6 +135,9 @@ self.container = new EmuCore(0, 0, 640, 640, "main").AddContent([
             }
         })
         .SetID("FULLNAME"),
+    new EmuButton(32, EMU_AUTO, ew, eh, "Export", function() {
+        obj_emu_demo.Export();
+    }),
     new EmuButton(32, EMU_AUTO, ew, eh, "Credits", function() {
         var ew = 320;
         var eh = 32;
