@@ -3,17 +3,28 @@
 self.files = [];
 self.filename_cache = { };
 
-if (file_exists(SAVE_FILE_LOCATION)) {
-    var buffer = buffer_load(SAVE_FILE_LOCATION);
-    self.files = json_parse(buffer_read(buffer, buffer_text));
-    buffer_delete(buffer);
-    
-    for (var i = 0, n = array_length(self.files); i < n; i++) {
-        var file = self.files[i];
-        file.toString = method(file, function() { return self.name; });
-        self.filename_cache[$ file.filename] = file;
+self.Load = function(filename) {
+    if (file_exists(filename)) {
+        var buffer = buffer_load(filename);
+        var files = json_parse(buffer_read(buffer, buffer_text));
+        buffer_delete(buffer);
+        
+        self.Clear();
+        for (var i = 0, n = array_length(files); i < n; i++) {
+            var file = files[i];
+            file.toString = method(file, function() { return self.name; });
+            self.filename_cache[$ file.filename] = file;
+            array_push(self.files, file);
+        }
     }
-}
+};
+
+self.Save = function(filename) {
+    var save_file = buffer_create(1, buffer_grow, 1);
+    buffer_write(save_file, buffer_text, json_stringify(self.files));
+    buffer_save(save_file, filename);
+    buffer_delete(save_file);
+};
 
 self.Add = function(filename) {
     if (!file_exists(filename)) return;
@@ -89,6 +100,7 @@ self.Export = function() {
 
 self.Clear = function() {
     array_resize(self.files, 0);
+    self.filename_cache = { };
 };
 
 self.Remove = function(index) {
@@ -97,6 +109,8 @@ self.Remove = function(index) {
     struct_remove(obj_emu_demo.filename_cache, file.filename);
     self.root.Refresh();
 };
+
+self.Load(SAVE_FILE_LOCATION);
 
 var ew = 400;
 var eh = 32;
