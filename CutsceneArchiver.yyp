@@ -37,6 +37,7 @@
   },
   "resources": [
     {"id":{"name":"scribble_anim_jitter","path":"scripts/scribble_anim_jitter/scribble_anim_jitter.yy",},},
+    {"id":{"name":"load_archive","path":"scripts/load_archive/load_archive.yy",},},
     {"id":{"name":"scribble_font_scale","path":"scripts/scribble_font_scale/scribble_font_scale.yy",},},
     {"id":{"name":"__scribble_gc_collect","path":"scripts/__scribble_gc_collect/__scribble_gc_collect.yy",},},
     {"id":{"name":"scribble_typist","path":"scripts/scribble_typist/scribble_typist.yy",},},
