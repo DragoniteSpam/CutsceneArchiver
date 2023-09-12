@@ -17,11 +17,13 @@ if (array_length(array) > 0) {
 if (!EmuOverlay.GetTop()) {
     if (keyboard_check(vk_control)) {
         if (keyboard_check_pressed(ord("S"))) {
+            _emu_active_element(pointer_null);
             var filename = get_save_filename($"cutscene save json|*.{SAVE_FILE_EXTENSION}", "");
             self.Save(filename);
         }
         
         if (keyboard_check_pressed(ord("O"))) {
+            _emu_active_element(pointer_null);
             var filename = get_open_filename($"cutscene save json|*.{SAVE_FILE_EXTENSION}", "");
             self.Load(filename);
         }
