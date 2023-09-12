@@ -2,6 +2,7 @@ function load_archive(filename) {
     if (!file_exists(filename)) return;
     
     var buffer = buffer_load(filename);
+    var decompressed = buffer_decompress(buffer);
     var version = buffer_read(buffer, buffer_u64);
     var file_count = buffer_read(buffer, buffer_u64);
     var appendage_point = buffer_read(buffer, buffer_u64);
@@ -18,6 +19,9 @@ function load_archive(filename) {
         
         output[$ name] = b;
     }
+    
+    buffer_delete(buffer);
+    buffer_delete(decompressed);
     
     return output;
 }

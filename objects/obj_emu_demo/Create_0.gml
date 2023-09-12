@@ -93,8 +93,10 @@ self.Export = function() {
     buffer_resize(buffer, appendage + content_size);
     buffer_copy(buffer_content, 0, content_size, buffer, appendage);
     
-    buffer_save(buffer, save_filename);
+    var compressed = buffer_compress(buffer, 0, appendage + content_size);
+    buffer_save(compressed, save_filename);
     
+    buffer_delete(compressed);
     buffer_delete(buffer_content);
     buffer_delete(buffer);
 };
