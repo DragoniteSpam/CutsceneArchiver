@@ -1,8 +1,8 @@
 {
   "FolderOrderSettings": [
     {"name":"Emu","order":1,"path":"folders/Emu.yy",},
-    {"name":"Scribble","order":2,"path":"folders/Scribble.yy",},
     {"name":"File Dropper","order":34,"path":"folders/File Dropper.yy",},
+    {"name":"Scribble","order":2,"path":"folders/Scribble.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"scribble_anim_jitter","order":2,"path":"scripts/scribble_anim_jitter/scribble_anim_jitter.yy",},
