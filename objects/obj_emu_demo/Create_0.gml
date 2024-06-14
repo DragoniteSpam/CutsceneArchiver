@@ -110,7 +110,7 @@ self.Remove = function(index) {
     var file = obj_emu_demo.files[index];
     array_delete(obj_emu_demo.files, index, 1);
     struct_remove(obj_emu_demo.filename_cache, file.filename);
-    self.root.Refresh();
+    self.container.Refresh();
 };
 
 self.Load(SAVE_FILE_LOCATION);
