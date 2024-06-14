@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "load_archive",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "CutsceneArchiver",
-    "path": "CutsceneArchiver.yyp",
+  "$GMScript":"",
+  "%Name":"load_archive",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"load_archive",
+  "parent":{
+    "name":"CutsceneArchiver",
+    "path":"CutsceneArchiver.yyp",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }
